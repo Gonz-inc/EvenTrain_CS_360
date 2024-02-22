@@ -1,0 +1,19 @@
+<resources>
+    <string name="app_name">Eventrain</string>
+    <string name="login">Login</string>
+    <string name="username">Username</string>
+    <string name="password">Password</string>
+    <string name="login_text_button">Login</string>
+    <string name="register_text_button">Register</string>
+    <string name="trainImage">trainImage</string>
+    <string name="date">Date</string>
+    <string name="eventTextView">Event</string>
+    <string name="add">Add</string>
+    <string name="edit">Edit</string>
+    <string name="delete">Delete</string>
+    <string name="enable_sms_notifications">Enable SMS Notifications</string>
+    <string name="update_notifications_permissions">Update Notifications Permissions</string>
+    <string name="settings_title">Settings</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+</resources>
