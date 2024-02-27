@@ -1,55 +1,76 @@
 package com.gerardogonzalez.gerardo_gonzalez_event_tracking;
 
-import androidx.appcompat.app.AppCompatActivity;
+import static com.gerardogonzalez.gerardo_gonzalez_event_tracking.R.*;
 
-// MainActivity.java
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
+
+import androidx.appcompat.widget.Toolbar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.navigation.NavController;
+import androidx.navigation.fragment.NavHostFragment;
+import androidx.navigation.ui.AppBarConfiguration;
+import androidx.navigation.ui.NavigationUI;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.google.android.material.navigation.NavigationBarView;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private RecyclerView recyclerViewOptions;
-    private List<String> options;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_navigation);
+        setContentView(layout.activity_main);
 
-        recyclerViewOptions = findViewById(R.id.recyclerViewOptions);
-        LinearLayoutManager layoutManager = new LinearLayoutManager(this);
-        recyclerViewOptions.setLayoutManager(layoutManager);
+        Toolbar toolbar = findViewById(id.toolbar);
+        setSupportActionBar(toolbar);
 
+        BottomNavigationView navView = findViewById(id.nav_view);
+        NavHostFragment navHostFrag = (NavHostFragment) getSupportFragmentManager()
+                .findFragmentById(id.nav_host_fragment);
 
-        options = new ArrayList<>();
-        options.add("Login Screen");
-        options.add("SMS Request Screen");
-        options.add("Database Screen");
+        if(navHostFrag != null) {
+            NavController navController = navHostFrag.getNavController();
 
-        navigation adapter;
-        adapter = new navigation(options, new navigation.OnItemClickListener() {
-            @Override
-            public void onItemClick(String option) {
-                switch (option) {
-                    case "Login Screen":
-                        startActivity(new Intent(MainActivity.this, loginActivity.class));
-                        break;
-                    case "SMS Request Screen":
-                        startActivity(new Intent(MainActivity.this, sms_request_activity.class));
-                        break;
-                    case "Database Screen":
-                        startActivity(new Intent(MainActivity.this, display_database.class));
-                        break;
+            AppBarConfiguration appBarConfig = new AppBarConfiguration.Builder(
+                    id.navigation_event, id.navigation_data,
+                    id.navigation_settings).build();
 
+            NavigationUI.setupActionBarWithNavController(this, navController,
+                    appBarConfig);
+
+            NavigationUI.setupWithNavController(navView, navController);
+
+            navView.setOnItemSelectedListener(new BottomNavigationView.OnItemSelectedListener() {
+
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    if(item.getItemId() == R.id.nav_home) {
+                        navController.navigate(R.id.navigation_event);
+                        return true;
+                    }
+                    else if(item.getItemId() == R.id.nav_data) {
+                        navController.navigate((R.id.navigation_data));
+                        return true;
+                    }
+                    else if(item.getItemId() == R.id.nav_setting) {
+                        navController.navigate((R.id.navigation_settings));
+                        return true;
+                    }
+                    return false;
                 }
-            }
-        });
-        recyclerViewOptions.setAdapter(adapter);
+            });
+        }
 
     }
+
+
 }

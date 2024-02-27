@@ -8,17 +8,17 @@
     <fragment
         android:id="@+id/navigation_event"
         android:name="com.gerardogonzalez.gerardo_gonzalez_event_tracking.LoginFragment"
-        android:label="@string/app_name"
+        android:label="@string/login_fragment"
         tools:layout="@layout/fragment_login"/>
     <fragment
         android:id="@+id/navigation_data"
         android:name="com.gerardogonzalez.gerardo_gonzalez_event_tracking.DataFragment"
-        android:label="@string/date"
+        android:label="@string/data_fragment"
         tools:layout="@layout/fragment_data_fragement"/>
     <fragment
         android:id="@+id/navigation_settings"
         android:name="com.gerardogonzalez.gerardo_gonzalez_event_tracking.SettingFragment"
-        android:label="@string/enable_sms_notifications"
+        android:label="@string/sms_fragement"
         tools:layout="@layout/fragment_setting"/>
 
 
