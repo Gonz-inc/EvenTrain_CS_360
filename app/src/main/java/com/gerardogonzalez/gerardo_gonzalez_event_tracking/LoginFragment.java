@@ -3,10 +3,15 @@ package com.gerardogonzalez.gerardo_gonzalez_event_tracking;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
+import androidx.navigation.Navigation;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.Toast;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -59,6 +64,48 @@ public class LoginFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_login, container, false);
+        View view = inflater.inflate(R.layout.fragment_login, container, false);
+
+        Button loginButton = view.findViewById(R.id.Submit_Button);
+        Button registerButton = view.findViewById(R.id.create_Acct);
+
+        BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.nav_view);
+
+        // Hide the bottom navigation view
+        bottomNavigationView.setVisibility(View.GONE);
+
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO: change this variabel for credential validation.
+                boolean credentialPlaceHolder = true;
+
+                if(credentialPlaceHolder) {
+                    Navigation.findNavController(view).navigate(R.id.navigation_home);
+                }
+                else {
+                    Toast.makeText(getContext(), "Invalid Username and Password", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        registerButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
+        return view;
+    }
+
+    @Override
+    public void onDestroyView() {
+        super.onDestroyView();
+
+        // Get reference to the bottom navigation view
+        BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.nav_view);
+
+        // Show the bottom navigation view
+        bottomNavigationView.setVisibility(View.VISIBLE);
     }
 }

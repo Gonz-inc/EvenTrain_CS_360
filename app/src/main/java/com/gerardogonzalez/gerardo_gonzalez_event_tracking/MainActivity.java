@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
                 @Override
                 public boolean onNavigationItemSelected(@NonNull MenuItem item) {
                     if(item.getItemId() == R.id.nav_home) {
-                        navController.navigate(R.id.navigation_event);
+                        navController.navigate(R.id.navigation_home);
                         return true;
                     }
                     else if(item.getItemId() == R.id.nav_data) {
