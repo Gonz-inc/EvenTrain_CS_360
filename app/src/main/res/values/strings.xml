@@ -22,5 +22,9 @@
     <string name="data_fragment">Upcoming Events</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="homepage">HomePage</string>
+    <string name="add_event">Add Event</string>
+    <string name="event_name">Event Name</string>
+    <string name="event_date">Event Date</string>
+    <string name="event_notes">Event Notes</string>
 
 </resources>

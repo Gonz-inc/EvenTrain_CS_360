@@ -1,110 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".DataFragment">
 
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guidelineVertical"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        app:layout_constraintGuide_begin="206dp" />
-
     <TextView
-        android:id="@+id/dateViewText"
-        style="@style/dateColumn"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/date"
-        app:layout_constraintEnd_toStartOf="@id/guidelineVertical"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:id="@+id/eventTextView"
-        style="@style/eventColumn"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:text="@string/eventTextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/guidelineVertical"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recycler_view"
+        android:id="@+id/addEvent_textview"
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginVertical="20sp"
-        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
-        app:layout_constraintBottom_toTopOf="@id/add_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/dateViewText"
-        app:spanCount="2" >
+        android:layout_height="70sp"
+        android:layout_marginTop="60dp"
+        android:textAlignment="center"
+        android:text="@string/add_event"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        style="@style/loginMessage"
+        />
 
-    </androidx.recyclerview.widget.RecyclerView>
+    <EditText
+        android:id="@+id/titleInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:minHeight="70dp"
+        android:hint="@string/event_name"
+        android:autofillHints="@string/event_name"
+        android:textAlignment="center"
+        android:inputType="text"
+        app:layout_constraintTop_toBottomOf="@id/addEvent_textview"
+        />
+
+    <EditText
+        android:id="@+id/dateInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:minHeight="70dp"
+        android:hint="@string/event_date"
+        android:autofillHints="@string/event_date"
+        android:textAlignment="center"
+        android:inputType="date"
+        app:layout_constraintTop_toBottomOf="@id/titleInput" />
+    <EditText
+        android:id="@+id/discrInput"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:minHeight="70dp"
+        android:hint="@string/event_notes"
+        android:autofillHints="@string/event_notes"
+        android:textAlignment="center"
+        android:inputType="text"
+        app:layout_constraintTop_toBottomOf="@id/dateInput"
+        />
 
     <Button
         android:id="@+id/add_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="16dp"
+        android:layout_marginEnd="16dp"
         android:layout_marginBottom="16dp"
         android:text="@string/add"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
 
-    <Button
-        android:id="@+id/edit_button"
-        android:layout_width="wrap_content"
-        android:layout_height="48dp"
-        android:text="@string/edit"
-        app:layout_constraintBaseline_toBaselineOf="@id/add_button"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recycler_view" />
 
-    <Button
-        android:id="@+id/delete_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginLeft="16dp"
-        android:text="@string/delete"
-        app:layout_constraintBaseline_toBaselineOf="@id/edit_button"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="parent" />
-
-    <CheckBox
-        android:id="@+id/checkBoxDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        app:layout_constraintBottom_toBottomOf="@id/dateViewText"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <CheckBox
-        android:id="@+id/checkBoxEvent"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        app:layout_constraintBottom_toBottomOf="@id/eventTextView"
-        app:layout_constraintStart_toEndOf="@id/guidelineVertical"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Data HERE"
-        android:textSize="30sp"
-        tools:layout_editor_absoluteX="202dp"
-        tools:layout_editor_absoluteY="374dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

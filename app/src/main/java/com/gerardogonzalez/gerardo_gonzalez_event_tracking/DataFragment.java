@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -24,6 +25,7 @@ public class DataFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
+    private EventDatabase dbHelper;
     public DataFragment() {
         // Required empty public constructor
     }
@@ -49,6 +51,7 @@ public class DataFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        dbHelper = new EventDatabase(getActivity());
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -59,6 +62,26 @@ public class DataFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_data_fragement, container, false);
+        View view = inflater.inflate(R.layout.fragment_data_fragement, container, false);
+
+        Button addButton = view.findViewById(R.id.add_button);
+
+        addButton.setOnClickListener(v -> {
+
+        });
+
+        return view;
+    }
+
+    public void addItem(String username, String password, String title, String date, String description) {
+        dbHelper.addEvent(username, password, title, date, description);
+    }
+
+    public void removeItem(long eventId) {
+        dbHelper.deleteEvent(eventId);
+    }
+
+    public void updateItem(long eventId, String title, String date, String description) {
+        dbHelper.updateEvent(eventId, title, date, description);
     }
 }
