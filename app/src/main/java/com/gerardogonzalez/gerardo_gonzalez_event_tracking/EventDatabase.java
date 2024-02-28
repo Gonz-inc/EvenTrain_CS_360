@@ -15,6 +15,7 @@ public class EventDatabase extends SQLiteOpenHelper {
         private static final String eventTable = "event";
         private static final String username = "username";
         private static final String password = "password" ;
+        private static final String isLoggedIn = "loggedIn";
         private static final String title_of_event = "title";
         private static final String date_of_event = "date";
         private static final String description = "description";
@@ -29,7 +30,8 @@ public class EventDatabase extends SQLiteOpenHelper {
                 EventTable._ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 EventTable.username + " TEXT, " +
                 EventTable.password + " TEXT, " +
-                EventTable.title_of_event + "TEXT, " +
+                EventTable.isLoggedIn + " INTEGER DEFAULT 0, " +
+                EventTable.title_of_event + " TEXT, " +
                 EventTable.date_of_event + " TEXT, " +
                 EventTable.description + " TEXT)" );
     }
@@ -58,6 +60,7 @@ public class EventDatabase extends SQLiteOpenHelper {
         return result != -1;
     }
 
+
     public boolean updatePassword(String username, String newPassword) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -66,11 +69,9 @@ public class EventDatabase extends SQLiteOpenHelper {
         return rowsAffected > 0;
     }
 
-    public void addEvent (String username, String password, String title, String date, String description){
+    public void addEvent (String title, String date, String description){
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues values = new ContentValues();
-        values.put(EventTable.username, username);
-        values.put(EventTable.password, password);
         values.put(EventTable.title_of_event, title);
         values.put(EventTable.date_of_event, date);
         values.put(EventTable.description, description);

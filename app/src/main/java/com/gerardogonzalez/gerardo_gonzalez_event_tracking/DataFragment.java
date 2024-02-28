@@ -8,6 +8,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -65,16 +67,28 @@ public class DataFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_data_fragement, container, false);
 
         Button addButton = view.findViewById(R.id.add_button);
+        EditText titleInput = view.findViewById(R.id.titleInput);
+        EditText dateInput = view.findViewById(R.id.dateInput);
+        EditText decripInput = view.findViewById(R.id.discrInput);
 
         addButton.setOnClickListener(v -> {
+            String title = titleInput.getText().toString().trim();
+            String date = dateInput.getText().toString().trim();
+            String description = decripInput.getText().toString().trim();
 
+            if(title.isEmpty() || date.isEmpty()) {
+                Toast.makeText(getContext(), "Title and Date of event required.", Toast.LENGTH_SHORT).show();
+            }
+            else {
+                addItem(title, date, description);
+            }
         });
 
         return view;
     }
 
-    public void addItem(String username, String password, String title, String date, String description) {
-        dbHelper.addEvent(username, password, title, date, description);
+    public void addItem(String title, String date, String description) {
+        dbHelper.addEvent(title, date, description);
     }
 
     public void removeItem(long eventId) {
