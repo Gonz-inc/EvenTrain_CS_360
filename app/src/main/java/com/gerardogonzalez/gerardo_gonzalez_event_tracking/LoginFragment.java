@@ -1,14 +1,19 @@
 package com.gerardogonzalez.gerardo_gonzalez_event_tracking;
 
+import android.database.DatabaseUtils;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
-
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
@@ -28,6 +33,8 @@ public class LoginFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    private EventDatabase dbHelper;
 
     public LoginFragment() {
         // Required empty public constructor
@@ -54,6 +61,7 @@ public class LoginFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        dbHelper = new EventDatabase(getContext());
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
@@ -69,33 +77,41 @@ public class LoginFragment extends Fragment {
         Button loginButton = view.findViewById(R.id.Submit_Button);
         Button registerButton = view.findViewById(R.id.create_Acct);
 
+        EditText usernameEditText = view.findViewById(R.id.user_Name);
+        EditText passwordEditText = view.findViewById(R.id.user_Pass);
+
         BottomNavigationView bottomNavigationView = getActivity().findViewById(R.id.nav_view);
 
         // Hide the bottom navigation view
         bottomNavigationView.setVisibility(View.GONE);
 
-        loginButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // TODO: change this variabel for credential validation.
-                boolean credentialPlaceHolder = true;
-
-                if(credentialPlaceHolder) {
-                    Navigation.findNavController(view).navigate(R.id.navigation_home);
-                }
-                else {
-                    Toast.makeText(getContext(), "Invalid Username and Password", Toast.LENGTH_SHORT).show();
-                }
+        loginButton.setOnClickListener(v -> {
+            String username = usernameEditText.getText().toString();
+            String password = passwordEditText.getText().toString();
+            boolean validated = validationCheck(username, password);
+            if (validated) {
+                Navigation.findNavController(view).navigate(R.id.navigation_home);
+            } else {
+                Toast.makeText(getContext(), "Invalid Username and Password", Toast.LENGTH_SHORT).show();
             }
         });
 
-        registerButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
+        registerButton.setOnClickListener(v -> {
+            String username = usernameEditText.getText().toString();
+            String password = passwordEditText.getText().toString();
+            boolean added = dbHelper.addUser(username, password);
+            if (added) {
+                Toast.makeText(getContext(), "User registered successfully", Toast.LENGTH_SHORT).show();
+            } else {
+                Toast.makeText(getContext(), "User already exists", Toast.LENGTH_SHORT).show();
             }
         });
+
         return view;
+    }
+
+    private boolean validationCheck(String username, String password) {
+        return dbHelper.checkUser(username, password);
     }
 
     @Override
