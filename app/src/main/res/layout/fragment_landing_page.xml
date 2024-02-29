@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout
+<androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -9,28 +9,42 @@
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="50dp"
+        android:text="Upcoming Events"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        style="@style/discrpTxT"/>
+
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/hGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_begin="206dp"/>
 
     <Button
         android:id="@+id/edit_button"
+        android:layout_marginBottom="100dp"
         android:layout_width="wrap_content"
         android:layout_height="48dp"
         android:text="@string/edit"
-        app:layout_constraintBaseline_toBaselineOf="@id/add_button"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/recycler_view" />
+        app:layout_constraintStart_toStartOf="@id/hGuideline"
+        app:layout_constraintBottom_toBottomOf="parent"
+        />
 
     <Button
         android:id="@+id/delete_button"
-        app:layout_constraintBaseline_toBaselineOf="@id/edit_button"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="parent"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="100dp"
         android:layout_marginLeft="16dp"
-        android:text="@string/delete" />
+        android:text="@string/delete"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@id/hGuideline"/>
 
-</FrameLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
